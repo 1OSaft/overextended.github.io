@@ -197,6 +197,7 @@ end)
 ## displayMetadata
 
 Sets a metadata property to display in the tooltip.
+The export needs to be run once after the player is fully loaded.
 
 ```lua
 exports.ox_inventory:displayMetadata(metadata, value)
@@ -210,18 +211,41 @@ exports.ox_inventory:displayMetadata(metadata, value)
   - Label for the string metadata property to be displayed.
 
 <br/>
-<u>**Example**</u>
 
-```lua
-exports.ox_inventory:displayMetadata('mustard', 'Mustard')
-```
 
-```lua
-exports.ox_inventory:displayMetadata({
-    mustard = 'Mustard',
-    ketchup = 'Ketchup'
-})
-```
+<Tabs items={["ESX", "ox", "qb"]}>
+  <Tab>
+    ```lua
+	AddEventHandler('esx:playerLoaded', function(xPlayer)
+		exports.ox_inventory:displayMetadata({
+		    mustard = 'Mustard',
+		    ketchup = 'Ketchup'
+		})
+	end)
+    ```
+  </Tab>
+  <Tab>
+    ```lua
+	AddEventHandler('ox:playerLoaded', function(data)
+		exports.ox_inventory:displayMetadata({
+		    mustard = 'Mustard',
+		    ketchup = 'Ketchup'
+		})
+	end)
+    ```
+  </Tab>
+  <Tab>
+    ```lua
+
+	RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+		exports.ox_inventory:displayMetadata({
+		    mustard = 'Mustard',
+		    ketchup = 'Ketchup'
+		})
+	end)
+    ```
+  </Tab>
+</Tabs>
 
 ## giveItemToTarget
 
